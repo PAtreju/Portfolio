@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSciagi</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-[#12192b] via-[#60279a] to-[#9150c1] bg-fixed text-gray-100 font-sans m-0 p-0 flex flex-col gap-12">
+    <div class="absolute top-3 right-5 flex items-center gap-3">
+        <a href="/logout" class="bg-black/30 backdrop-blur-sm border border-white/20 px-3 py-1 rounded text-sm hover:bg-black/40 transition-colors text-white no-underline">Logout</a>
+
+    </div>
+
+    <h1 class="text-4xl text-center pt-12 font-semibold text-white/90">AutoSciagi</h1>
+
+    <div class="flex justify-center">
+        <div class="flex flex-col md:flex-row justify-center gap-12 self-center w-4/5 rounded-xl py-4 bg-black/30 backdrop-blur-sm border border-white/10">
+            <div class="flex flex-col min-w-[45%] h-full overflow-auto">
+                <h2 class="text-xl mb-4 text-white/80 font-semibold">Create New</h2>
+                <form method="post" action="/create" class="flex flex-col gap-3">
+                    <input type="text" name="title" placeholder="Title" class="p-3 border border-white/30 rounded-md bg-black/10 backdrop-blur-sm text-white placeholder-gray-300 focus:border-white/50 focus:outline-none transition-colors" required>
+                    <textarea name="description" placeholder="Description" class="p-3 border border-white/30 rounded-md bg-black/10 backdrop-blur-sm text-white placeholder-gray-300 h-32 focus:border-white/50 focus:outline-none transition-colors resize-none" required></textarea>
+                    <button type="submit" class="p-3 border border-white/30 rounded-md bg-black/10 backdrop-blur-sm text-white hover:bg-white/10 hover:border-white/50 cursor-pointer transition-all duration-200 font-medium">Create</button>
+                </form>
+            </div>
+            <div class="flex flex-col min-w-[45%]">
+                <h2 class="text-xl mb-4 text-white/80 font-semibold">Recent Items</h2>
+                <ul class="pl-5 space-y-2 max-h-[255px] overflow-auto">
+                    {% for item in items %}
+                    <li class="py-2 px-3 rounded-md bg-black/10 border border-white/10 hover:bg-black/20 transition-colors">
+                        <a href="/item/{{ item.id }}" class="text-white hover:text-gray-200 no-underline transition-colors">{{ item.title }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

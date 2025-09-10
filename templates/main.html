@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShroomDev</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="../static/images/favicon_io/site.webmanifest">
+    <link rel="stylesheet" href="../static/style_main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="font-[Roboto] m-0 p-0 text-gray-100 flex flex-col gap-12 bg-gradient-to-br from-slate-900 via-purple-800 to-purple-600 bg-no-repeat bg-fixed bg-cover bg-center min-h-screen">
+    
+    <div class="flex justify-center items-center h-screen w-full overflow-hidden">
+        <div class="flex items-center justify-center max-sm:flex-col">
+            
+            <span class="logo-text text-9xl md:text-9xl sm:text-6xl max-sm:text-5xl font-black tracking-wider text-gray-100">SHROOM</span>
+            
+            <img src="/static/images/toadstool.svg" alt="Mushroom" class="logo-image h-60 -mt-10 -mx-12 md:h-60 md:-mt-10 md:-mx-12 sm:h-32 sm:-mt-2 sm:-mx-5 max-sm:h-32 max-sm:-my-16 max-sm:mx-0 z-1">
+            
+            <span class="logo-text text-9xl md:text-9xl sm:text-6xl max-sm:text-5xl font-black tracking-wider text-gray-100 z-2">DEV</span>
+        </div>
+    </div>
+
+    <div class="portfolio-container text-center px-4 min-h-80 my-60 flex flex-col justify-center items-center">
+        <h1 class="portfolio-text text-7xl font-bold mb-0">PORTFOLIO</h1>
+        <h1 class="portfolio-text text-4xl font-bold mb-4">UNDER CONSTRUCTION</h1>
+    </div>
+</body>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const portfolioTexts = entry.target.querySelectorAll('.portfolio-text');
+                        portfolioTexts.forEach((text, index) => {
+                            setTimeout(() => {
+                                text.classList.add('visible');
+                            }, index * 300);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+            const portfolioContainer = document.querySelector('.portfolio-container');
+            observer.observe(portfolioContainer);
+        });
+</script>
+</html>
