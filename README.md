@@ -88,7 +88,7 @@ static/
 ├─ style.css         # Global styles
 ├─ style_main.css    # Landing styles
 ├─ style_sciaga.css  # List & panel styles
-└─ images/           # SVG logo & favicons
+└─ images/           # SVG logo, images & favicons
 ``` 
 
 ---
