@@ -27,30 +27,8 @@
         </div>
     </div>
 
-    <div class="portfolio-container text-center px-4 min-h-80 my-60 flex flex-col justify-center items-center">
-        <h1 class="portfolio-text text-7xl font-bold mb-0">PORTFOLIO</h1>
-        <h1 class="portfolio-text text-4xl font-bold mb-4">UNDER CONSTRUCTION</h1>
+    <div class="portfolio-container text-center flex flex-col justify-center items-center">
+        <img class="max-h-[600px]" src="/static/images/yellow.svg" alt="">
     </div>
 </body>
-<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const portfolioTexts = entry.target.querySelectorAll('.portfolio-text');
-                        portfolioTexts.forEach((text, index) => {
-                            setTimeout(() => {
-                                text.classList.add('visible');
-                            }, index * 300);
-                        });
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.2
-            });
-            const portfolioContainer = document.querySelector('.portfolio-container');
-            observer.observe(portfolioContainer);
-        });
-</script>
 </html>
