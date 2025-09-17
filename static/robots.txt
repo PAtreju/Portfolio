@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://shroomdev.pl/sitemap.xml
+Sitemap: https://shroomdev.pl/static/sitemap.xml
