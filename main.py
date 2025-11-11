@@ -116,7 +116,7 @@ async def get_panel(request: Request):
         {"request": request, "briefs": briefs}
     )
 
-@app.post("/create-brief", response_class=HTMLResponse)
+@app.post("/create", response_class=HTMLResponse)
 async def create_brief(
     request: Request, 
     theme: str = Form(...), 
