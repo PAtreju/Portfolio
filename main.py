@@ -13,6 +13,7 @@ from auth import (
     User, fake_users_db
 )
 from datetime import timedelta
+from typing import Optional
 
 app = FastAPI(docs_url=None, redoc_url=None)
 
@@ -116,22 +117,27 @@ async def get_panel(request: Request):
         {"request": request, "briefs": briefs}
     )
 
-@app.post("/create", response_class=HTMLResponse)
+@app.post("/create-brief", response_class=HTMLResponse)
 async def create_brief(
-    request: Request, 
-    theme: str = Form(...), 
-    desc: str = Form(...)
+    request: Request,
+    theme: str = Form(...),
+    desc: Optional[str] = Form(None)
 ):
     user = await get_current_user(request)
     if not user:
         return RedirectResponse(url="/login", status_code=303)
     
     try:
+        # Build user prompt, include desc only if provided
+        user_prompt = f"Napisz dokładną i rozwiniętą ściąge na temat: {theme}."
+        if desc:
+            user_prompt += f" Dodatkowe informajce: {desc}"
+
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that creates cheat sheets. Content of your response will be put in html div so include html tags."},
-                {"role": "user", "content": f"Napisz dokładną i rozwiniętą ściąge na temat: {theme}." + (f"Dodatkowe informajce: {desc}" if desc != "" else "")}
+                {"role": "user", "content": user_prompt}
             ]
         )
         brief_content = response.choices[0].message.content
@@ -148,7 +154,7 @@ async def create_brief(
         <head>
             <title>Sciaga: {theme}</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="/static/style.css">
+            <link rel="stylesheet" href="/static/style_sciaga.css">
             <link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicon_io/apple-touch-icon.png">
             <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon_io/favicon-32x32.png">
             <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon_io/favicon-16x16.png">
