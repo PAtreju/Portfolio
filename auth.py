@@ -11,7 +11,7 @@ from pydantic import BaseModel
 fake_users_db = {
     "admin": {
         "username": "admin",
-        "hashed_password": "$2b$12$rWzW3P./DORcuiqzRCYZPufvQzXVr7bCrXDD55k6UO4veR/6FcQpe",  # "password"
+        "hashed_password": "$2b$12$XeMEXmVp5jlGkx7GckRmMubq9v4hPRd1Ig46iNJ/RUtnLQsHOZQaS",  # "password"
     }
 }
 

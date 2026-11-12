@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/style_sciaga.css?v={{ css_version }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/static/images/favicon_io/site.webmanifest">
+</head>
+<body>
+    <main class="sheet-host">
+        <template shadowrootmode="open">
+            <style>
+                /* Defaults for sheets without their own styling. :where() keeps specificity at 0,
+                   so any <style> or inline style shipped with the sheet always wins. */
+                .sheet-root {
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 16px;
+                    line-height: 1.55;
+                    color: #1f2430;
+                    overflow-wrap: break-word;
+                    overflow-x: auto;
+                }
+                :where(.sheet-root) :where(h1) { font-size: 1.8em; margin: 0 0 0.6em; line-height: 1.25; }
+                :where(.sheet-root) :where(h2) { font-size: 1.35em; margin: 1.4em 0 0.5em; padding-top: 0.8em; border-top: 1px solid #dde1e8; }
+                :where(.sheet-root) :where(h3) { font-size: 1.12em; margin: 1.1em 0 0.4em; }
+                :where(.sheet-root) :where(h4, h5, h6) { margin: 1em 0 0.4em; }
+                :where(.sheet-root) :where(p) { margin: 0.5em 0; }
+                :where(.sheet-root) :where(ul, ol) { margin: 0.5em 0; padding-left: 1.6em; }
+                :where(.sheet-root) :where(li) { margin: 0.2em 0; }
+                :where(.sheet-root) :where(table) { border-collapse: collapse; margin: 0.6em 0; max-width: 100%; }
+                :where(.sheet-root) :where(th, td) { border: 1px solid #d6dce4; padding: 0.3em 0.6em; vertical-align: top; text-align: left; }
+                :where(.sheet-root) :where(th) { background: #f0f3f7; }
+                :where(.sheet-root) :where(img, svg, video) { max-width: 100%; height: auto; }
+                :where(.sheet-root) :where(pre) { overflow-x: auto; padding: 0.8em; background: #f4f5f7; border-radius: 6px; }
+                :where(.sheet-root) :where(code) { font-family: ui-monospace, Consolas, monospace; font-size: 0.92em; }
+                :where(.sheet-root) :where(blockquote) { margin: 0.6em 0; padding-left: 1em; border-left: 3px solid #c7cdd8; }
+                :where(.sheet-root) :where(hr) { border: 0; border-top: 1px solid #dde1e8; margin: 1.2em 0; }
+                :where(.sheet-root) :where(a) { color: #4b2a8a; }
+                :where(.sheet-root) > :where(:first-child) { margin-top: 0; }
+            </style>
+            <div class="sheet-root">{{ content|safe }}</div>
+        </template>
+    </main>
+    <p class="go_back"><a href="/sciagi">Back to index</a></p>
+    <script>
+        // Fallback for browsers without declarative shadow DOM
+        if (!HTMLTemplateElement.prototype.hasOwnProperty("shadowRootMode")) {
+            document.querySelectorAll("template[shadowrootmode]").forEach(function (template) {
+                var root = template.parentNode.attachShadow({ mode: template.getAttribute("shadowrootmode") });
+                root.appendChild(template.content);
+                template.remove();
+            });
+        }
+    </script>
+</body>
+</html>
